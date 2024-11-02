@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %} | {{ user.get_full_name }}{% endblock %}
+{% block content %}
+{% load humanize %}
+{% load static %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">{{ user.get_full_name }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Dashboard Start -->
+<div class="container mt-50 mb-50">
+    {% include 'includes/messages.html' %}
+    <div class="main-title" style="text-align:left !important;">
+        <h1>Welcome, <span>{{ user.get_full_name }}</span></h1>
+
+        {% if user.socialaccount_set.exists %}
+            {% with google_account=user.socialaccount_set.first %}
+                <!-- Google login user info with profile picture -->
+                
+				
+
+                <p>
+                    <img src="{{ google_account.extra_data.picture }}" alt="User Photo" style="width:50px; height:50px; border-radius:50%;"> 
+                     <!-- {{ google_account.extra_data.name }} -->
+                </p>
+            {% endwith %}
+        {% else %}
+            <!-- Regular user info with default Font Awesome icon -->
+            
+            <p>
+                <i class="fa fa-user-circle" style="font-size: 50px; color: #6c757d;"></i>
+                
+            </p>
+        {% endif %}
+    </div>
+    {% if user_inquiry %}
+    <table class="table table-hover">
+        <p>Here are the cars that you have inquired about</p>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Car Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in user_inquiry %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{car.car_title}}</td>
+                <td>{{car.city}}</td>
+                <td>${{car.price | intcomma}}</td>
+                <td><a href="{% url 'car_details' car.car_id %}" class="btn btn-outline-dark">View Car</a></td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+
+
+    {% else %}
+    <div class="card text-center" style="max-width: auto; margin: auto; border: 1px solid #f50909;">
+        <div class="card-body">
+          
+          <p class="card-text">As of know we have not recived any enquiry form Your account</p>
+          
+          
+          
+        </div>
+      </div>
+      <div class="card text-center" style="max-width: auto; margin: auto; border: 1px solid #f50909;">
+        <div class="card-body">
+          
+          
+          <p class="card-text">If you have previously submitted, please check again after a few hours.</p>
+
+          
+          
+        </div>
+      </div>
+    {% endif %}
+    
+</div>
+<!-- Dashboard End -->
+
+{% endblock %}
