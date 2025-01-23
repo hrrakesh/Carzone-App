@@ -16,34 +16,11 @@ Create or use any existing email provider with SMTP. Change the details in `sett
 All data and text can be added and deleted in the admin panel. Initially, add all the details for `car_at_top` for the front page. No cars will be available initially.
 
 
-
-# home page
-
-
-
-# cars page
-
-# services page
-
-
-# contact
-
-
-# Login
-
-
-# registration
-
-
-# admin pannel
-
-# note
-
 User Rakesh holds no rights to any templates or images used.
 The project was provided with the necessary templates, and all backend connections were made by Rakesh.
 
 # For any help 
-mandyarakesh23@gmail.com
+ developer.rakeshhr@gmail.com
 
 
 
